@@ -16,24 +16,32 @@ Word directCode(short value)
     return static_cast<Word>((value < 0 ? signMask : 0) | (magnitude & magnitudeMask));
 }
 
-Word directSum(short first, short second)
+Word directSum(Word first, Word second)
 {
-    const int firstMagnitude = first < 0 ? -static_cast<int>(first) : first;
-    const int secondMagnitude = second < 0 ? -static_cast<int>(second) : second;
+    const Word firstSign = first & signMask;
+    const Word secondSign = second & signMask;
+    const Word firstMagnitude = first & magnitudeMask;
+    const Word secondMagnitude = second & magnitudeMask;
 
-    if ((first < 0) == (second < 0))
+    if (firstSign == secondSign)
     {
-        const int magnitude = firstMagnitude + secondMagnitude;
-        return static_cast<Word>((first < 0 ? signMask : 0) | magnitude);
+        const Word magnitude = static_cast<Word>((firstMagnitude + secondMagnitude) & magnitudeMask);
+        return static_cast<Word>(firstSign | magnitude);
     }
 
-    if (firstMagnitude >= secondMagnitude)
+    if (firstMagnitude > secondMagnitude)
     {
-        return static_cast<Word>((first < 0 ? signMask : 0) | (firstMagnitude - secondMagnitude));
+        return static_cast<Word>(firstSign | (firstMagnitude - secondMagnitude));
     }
 
-    return static_cast<Word>((second < 0 ? signMask : 0) | (secondMagnitude - firstMagnitude));
+    if (secondMagnitude > firstMagnitude)
+    {
+        return static_cast<Word>(secondSign | (secondMagnitude - firstMagnitude));
+    }
+
+    return 0;
 }
+
 
 std::string binary(Word value)
 {
@@ -77,12 +85,13 @@ int main()
 
     const Word xDirect = directCode(x);
     const Word yDirect = directCode(y);
-    const Word sumDirect = directSum(x, y);
+    const Word sumDirect = directSum(xDirect, yDirect);
 
     printLine(x, xDirect);
     printLine(y, yDirect);
     printLine(ordinarySum, sumDirect);
 }
+
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
