@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "вар. 6 зад. 2\\x64\\Debug\\вар. 6 зад. 2.obj",
+            "outputs": [
+                "вар. 6 зад. 2\\x64\\Debug\\вар. 6 зад. 2.cpp.obj.dt.module.json",
+                "вар. 6 зад. 2\\x64\\Debug\\вар. 6 зад. 2.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

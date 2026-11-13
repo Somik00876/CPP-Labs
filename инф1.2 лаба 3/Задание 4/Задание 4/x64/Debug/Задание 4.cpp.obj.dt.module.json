@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Задание 4\\x64\\Debug\\Задание 4.obj",
+            "outputs": [
+                "Задание 4\\x64\\Debug\\Задание 4.cpp.obj.dt.module.json",
+                "Задание 4\\x64\\Debug\\Задание 4.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}
